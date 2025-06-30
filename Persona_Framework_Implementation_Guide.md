@@ -1,306 +1,350 @@
-# Persona Framework: Implementation Guide
+# Persona Framework: Implementation Guide v2.0
 
-This guide provides instructions for implementing and using the Persona Framework across different AI assistant platforms and applications.
+This guide provides instructions for implementing and using the advanced Persona Framework - a collaborative AI team management system that enables multiple specialized personas to work together seamlessly.
 
 ## Table of Contents
 
-1. [Overview of the Persona Framework](#overview-of-the-persona-framework)
-2. [Implementation in VS Code with GitHub Copilot](#implementation-in-vs-code-with-github-copilot)
-3. [Implementation in Claude (Native & Web Applications)](#implementation-in-claude-native--web-applications)
-4. [Implementation in ChatGPT](#implementation-in-chatgpt)
-5. [Implementation in Google Gemini](#implementation-in-google-gemini)
-6. [Cross-Platform Best Practices](#cross-platform-best-practices)
-7. [Troubleshooting](#troubleshooting)
+1. [Overview of the Advanced Framework](#overview-of-the-advanced-framework)
+2. [Framework States and Control](#framework-states-and-control)
+3. [Team Management System](#team-management-system)
+4. [Implementation Across Platforms](#implementation-across-platforms)
+5. [Advanced Features](#advanced-features)
+6. [Performance Management](#performance-management)
+7. [Best Practices](#best-practices)
 
-## Overview of the Persona Framework
+## Overview of the Advanced Framework
 
-The Persona Framework enables a collaborative AI assistance system where multiple specialized personas work together to provide expert guidance in software development. The system features:
+The Persona Framework v2.0 is a **collaborative AI team management system** that goes far beyond simple persona switching. Key capabilities:
 
-- **Multiple specialized personas** with defined expertise areas (e.g., Blits Developer, Security Specialist)
-- **GitHub-style addressing** to target specific personas (`@persona_name`)
-- **Primary voice system** where one persona leads the response with input from others
-- **Optimistic skepticism protocol** that challenges premises before solving problems
-- **Response tagging** that identifies which persona is contributing to different parts of a response
+### Core System Features
+- **Team-Based Collaboration**: Pre-configured teams with complementary expertise
+- **Primary Voice System**: Unified responses with seamless expertise integration
+- **Optimistic Skepticism Protocol**: Challenges premises before providing solutions
+- **Dynamic State Management**: Framework can be turned on/off with active roster persistence
+- **Context-Aware Discovery**: Intelligent suggestions for persona activation
+- **Performance Monitoring**: Real-time impact measurement and optimization
 
-## Implementation in VS Code with GitHub Copilot
+### Advanced Collaboration Patterns
+- **Unified Team Voice**: Single coherent response incorporating multiple expertise areas
+- **Expertise Handoffs**: Natural transitions when topics move outside current expertise
+- **Response Tagging**: Transparent attribution showing which expertise contributed where
+- **Team Memory**: Cross-conversation persistence of successful collaboration patterns
 
-### Setup Process for VS Code
+## Framework States and Control
 
-1. **Create a Workspace**:
+### Operating Modes
 
-   ```bash
-   mkdir -p MyProject/Persona_Framework/config
-   mkdir -p MyProject/Persona_Framework/personas
-   ```
+**OFF Mode**
+```
+"personas off" / "disable persona system"
+```
+- Returns to base LLM responses
+- No persona processing overhead
+- One-time availability notification
+- Framework can be re-enabled anytime
 
-2. **Copy Schema Files**:
-   - Place the main persona schema files in `Persona_Framework/personas/`
-   - Place configuration files in `Persona_Framework/config/`
+**MINIMAL Mode**
+```
+"minimal persona mode"
+```
+- Single coordinator persona only
+- Reduced context overhead
+- Essential functionality maintained
 
-3. **Create a VS Code Workspace File**:
+**ACTIVE Mode** (Default)
+```
+"personas on" / "activate personas"
+```
+- Full persona system with selected roster
+- Team collaboration enabled
+- Context analysis and suggestions active
 
-   ```json
-   // MyProject.code-workspace
-   {
-     "folders": [
-       {
-         "path": "."
-       }
-     ],
-     "settings": {
-       "copilot.conversation.includePaths": ["./Persona_Framework"]
-     }
-   }
-   ```
+**MONITORING Mode**
+```
+"performance mode active"
+```
+- Full system with detailed performance tracking
+- Usage metrics and optimization recommendations
+- Impact measurement dashboard
 
-### Usage with GitHub Copilot
+### Framework Activation Flow
 
-1. **Initialize a Session**:
-   - Open the VS Code command palette (Ctrl+Shift+P / Cmd+Shift+P)
-   - Type `Copilot: Start Conversation`
-   - First message: "I'd like to use the Persona Framework located in ./Persona_Framework"
+**Initial Activation:**
+1. System scans for available personas and teams
+2. Loads default coordinator persona
+3. Enables discovery and suggestion system
+4. Presents available teams and commands
 
-2. **Addressing Personas**:
-   - Direct addressing: `@blits_developer How should I structure this component?`
-   - Topic-based routing: "What's the best way to handle TV navigation?" (automatically routes to Blits Developer)
+**State Transitions:**
+- Framework remembers previous state when reactivated
+- Teams persist across conversations (platform-dependent)
+- Graceful degradation when persistence unavailable
 
-3. **Switching Personas**:
-   - Explicit: `@security_specialist Now let's review this authentication code`
-   - Implicit: Ask a security-related question to trigger automatic handoff
+## Team Management System
 
-4. **Customization in VS Code**:
-   - Create a `.github/copilot/personas` directory in your project
-   - Place your custom persona JSON files there
-   - Copilot will automatically load these personas when available in the context
+### Core Commands
 
-### VS Code-Specific Features
-
-- **Integration with tasks.json**: Run persona-specific tasks through Copilot commands
-- **Extension recommendations**: Personas can suggest VS Code extensions based on context
-- **Workspace-aware responses**: Personas have access to workspace context for more relevant answers
-- **Syntax highlighting**: VS Code can highlight `@persona_name` mentions in markdown files
-
-## Implementation in Claude (Native & Web Applications)
-
-### Setup Process for Claude
-
-1. **Create a New Chat**:
-   - Start a new chat with Claude
-   - Upload the persona schema files and framework configuration
-
-2. **Initialize the Framework**:
-
-   ```text
-   I'd like to use a Persona Framework with multiple AI personas for software development. 
-   I've uploaded the schema files. Please load these personas and use them according to the 
-   framework specifications when answering my questions.
-   ```
-
-### Usage with Claude
-
-1. **Direct Addressing**:
-   - `@blits_developer How would you implement focus management in a TV app?`
-
-2. **Conversation Mode**:
-   - In Claude's chat interface, the primary persona will respond with tags indicating when other personas contribute
-   - Example: "[DEVELOPER_CODING_PERSONA] Let's analyze this from an architectural perspective... [BD] For Lightning/Blits specifically, you'll need to consider..."
-
-3. **Claude-Specific Features**:
-   - **Document Analysis**: Upload code files for personas to analyze
-   - **Long Context Window**: Include more comprehensive persona definitions
-   - **Multiple File Upload**: Include all persona schemas at once
-
-4. **Limitations in Claude**:
-   - No persistent workspace context between sessions
-   - Need to re-upload schema files for new conversations
-   - Claude may need occasional reminders about the persona system
-
-### Implementation Example for Claude
-
-```text
-Claude, I'd like you to act as a collection of AI personas according to these schemas 
-I've uploaded. When I address a specific persona using @name notation, please respond 
-as that persona. Otherwise, use the Developer Coding Persona as the primary voice, 
-incorporating input from other personas when relevant using the [BD], [SS], etc. tags.
+**Team Operations**
+```
+"show my teams"              # List all available pre-configured teams
+"who's on my current team?"  # Display active roster
+"activate [team name]"       # Switch to pre-configured team
+"deactivate team"           # Return to default coordinator
 ```
 
-## Implementation in ChatGPT
-
-### Setup Process for ChatGPT
-
-1. **Create a Custom GPT** (with ChatGPT Plus subscription):
-   - Name it "Persona Framework"
-   - Upload the schema and configuration files as knowledge base
-   - Set instructions to implement the persona framework behavior
-   - Create a conversation starter that explains the persona system
-
-2. **Use in Regular ChatGPT**:
-   - Paste the complete system instructions in your first message
-   - Upload the schema files if possible, or paste their content
-
-### Usage in ChatGPT
-
-1. **Initialization**:
-
-   ```text
-   I want you to implement a Persona Framework for software development with multiple AI personas. Here are the schema definitions: [paste schemas]. Please follow the persona collaboration framework and respond using the primary voice system with appropriate tagging.
-   ```
-
-2. **Addressing and Responses**:
-   - Same as other platforms: `@persona_name` for direct addressing
-   - For GPTs: Set custom conversation starters for different personas
-
-3. **ChatGPT-Specific Features**:
-   - **Web Browsing**: Personas can use web browsing to gather up-to-date information
-   - **DALL-E Integration**: Personas can generate visualizations or diagrams
-   - **Code Interpreter**: Technical personas can execute and test code examples
-
-4. **Limitations in ChatGPT**:
-   - Context window limitations may require condensed persona definitions
-   - Custom GPTs may not perfectly implement the collaboration framework
-   - Need to occasionally refresh the persona framework rules
-
-## Implementation in Google Gemini
-
-### Setup Process for Gemini
-
-1. **Start a New Conversation**:
-   - Upload or paste the persona schema files
-   - Provide the framework configuration instructions
-
-2. **Extension Configuration** (when available):
-   - Gemini extensions could potentially load these schemas from GitHub repositories
-   - Use workspace connections to maintain persistence
-
-### Usage in Gemini
-
-1. **Initialization Command**:
-
-   ```text
-   I'm uploading schema files for a Persona Framework. Please implement this system
-   where you act as multiple developer personas that I can address using @name notation.
-   The primary voice should be Developer Coding Persona unless I specifically address
-   another persona.
-   ```
-
-2. **Addressing and Collaboration**:
-   - Same addressing system: `@persona_name`
-   - Responses will include tags to indicate persona contributions
-
-3. **Gemini-Specific Features**:
-   - **Multimodal Input**: Analyze screenshots or diagrams for technical feedback
-   - **Google Workspace Integration**: Reference content from Google Docs/Sheets
-   - **Real-time Information**: Access to more up-to-date information
-
-4. **Limitations in Gemini**:
-   - May need more frequent reminders about the persona system
-   - Limited file upload capabilities compared to some other platforms
-   - Workspace context may be more limited
-
-## Cross-Platform Best Practices
-
-### Persona File Management
-
-1. **Centralized Repository**:
-   - Store persona schemas in a GitHub repository
-   - Use version control to track changes to personas
-   - Create a folder structure:
-
-     ```text
-     /personas
-       /core
-         developer_coding_persona.json
-       /domain-specific
-         blits_developer.json
-         security_specialist.json
-         ...
-     /config
-       persona_collaboration_framework.md
-       persona_interaction_architecture.md
-     ```
-
-2. **Versioning**:
-   - Include version numbers in schema files
-   - Document changes in a CHANGELOG.md
-   - Use semantic versioning for schema updates
-
-### Consistent Addressing Conventions
-
-1. **Standardized Format**:
-   - Always use `@persona_name` format for addressing
-   - Maintain consistent snake_case naming for personas
-   - Document custom names in a central reference file
-
-2. **Persona Directory**:
-   - Create a `persona_directory.md` file listing all available personas
-   - Include brief descriptions of each persona's expertise
-   - Update when adding new personas
-
-### Cross-Platform Initialization
-
-Create a standardized initialization prompt that works across platforms:
-
-```text
-I'd like to implement a Persona Framework for software development assistance.
-This framework includes multiple AI personas with specific expertise areas that
-collaborate to provide comprehensive guidance.
-
-Key components:
-1. Multiple specialized personas (Blits Developer, Security Specialist, etc.)
-2. GitHub-style addressing (@persona_name)
-3. Primary voice system (Developer Coding Persona is default)
-4. Response tagging ([BD], [SS], etc. for contributions)
-
-I've provided the schema files and configuration. Please implement this system
-for our conversation.
+**Individual Persona Management**
+```
+"add @persona_name"         # Add persona to current roster
+"remove @persona_name"      # Remove persona from roster
+"list available personas"   # Show all individual personas
+"persona info @name"        # Detailed persona information
 ```
 
-## Troubleshooting
+**Discovery and Suggestions**
+```
+"suggest personas for this question"  # Get context-based recommendations
+"enable discovery"                    # Turn on auto-suggestions
+"disable discovery"                   # Turn off auto-suggestions
+"scan for new personas"              # Refresh persona pool
+```
 
-### Common Issues and Solutions
+### Team Activation Examples
 
-1. **Persona Not Responding**:
-   - Explicitly mention the persona again: `@persona_name are you there?`
-   - Provide more context related to that persona's expertise
-   - Check if the persona schema was properly loaded
+**Pre-configured Teams:**
+- `"activate security team"` → Security Architecture Review Team
+- `"activate frontend team"` → UI/UX Development Team  
+- `"activate design strategy team"` → Cross-platform Design Team
 
-2. **Inconsistent Tagging**:
-   - Remind the AI: "Please use the tagging system ([BD], [SS], etc.) for clarity"
-   - Ask for a "fully tagged response" to see all contributions
-   - Reinitialize the framework if needed
+**Custom Team Building:**
+- `"add @security_specialist"` → Add to current roster
+- `"create team mobile_dev with @react_specialist @ui_designer"` → Build custom team
 
-3. **Primary Voice Confusion**:
-   - Explicitly state: "Developer Coding Persona should be primary unless I address another persona"
-   - Use clear handoff language: "Now I'd like to speak with @security_specialist"
-   - Reset with: "Let's return to our primary developer persona"
+### Addressing System
 
-4. **Context Window Limitations**:
-   - Use abbreviated persona definitions when needed
-   - Focus on core expertise areas rather than complete schemas
-   - Periodically remind the AI of the framework principles
+**Direct Engagement:**
+- `@persona_name` → Makes that persona primary for their domain
+- `@team_name` → Activates entire pre-configured team
 
-### Platform-Specific Troubleshooting
+**Natural Routing:**
+- Framework automatically suggests relevant personas based on question content
+- Primary voice shifts naturally when expertise boundaries crossed
 
-1. **VS Code / GitHub Copilot**:
-   - Check that schema files are in the expected locations
-   - Verify Copilot has access to the files (check settings)
-   - Try restarting the Copilot conversation
+## Implementation Across Platforms
 
-2. **Claude**:
-   - Re-upload schema files if behavior changes
-   - Use more explicit instructions if Claude drifts from the framework
-   - Break complex schemas into multiple messages if hitting limits
+### Universal Implementation Pattern
 
-3. **ChatGPT**:
-   - For custom GPTs, edit the instructions if behavior is inconsistent
-   - In regular ChatGPT, provide refresher context in longer conversations
-   - Use "continue acting as" reminders when needed
+**1. Framework Initialization**
+```text
+I'd like to activate the Persona Framework v2.0 collaborative AI system. 
+This includes team management, primary voice coordination, and performance 
+monitoring capabilities. Please initialize with default coordinator.
+```
 
-4. **Gemini**:
-   - More frequent framework reminders may be needed
-   - Use numbered lists for complex instructions
-   - Explicitly request persona responses when automatic routing fails
+**2. Schema Loading**
+- Upload persona schema files and team definitions
+- Framework scans and builds available persona pool
+- Establishes team configurations and collaboration patterns
+
+**3. State Management Setup**
+- Platform determines persistence capabilities
+- Framework adapts to available storage mechanisms
+- Graceful fallback for session-only operation
+
+### Platform-Specific Features
+
+**Claude Projects**
+- Store team configurations in project artifacts
+- Cross-conversation team persistence
+- Performance metrics stored as artifacts
+- Document analysis with persona teams
+
+**VS Code/GitHub Copilot**
+- Workspace-aware persona suggestions
+- Integration with development workflow
+- File context analysis for relevant expertise
+- Extension and tool recommendations
+
+**ChatGPT**
+- Custom GPT configurations for team templates
+- Web browsing for up-to-date information
+- DALL-E integration for visualizations
+- Code execution for technical validation
+
+**Google Gemini**
+- Multimodal input analysis
+- Google Workspace integration
+- Real-time information access
+- Document and spreadsheet context
+
+## Advanced Features
+
+### Optimistic Skepticism Protocol
+
+**Challenge Sequence (Always First):**
+1. "How does this serve the larger project objectives?"
+2. "What specific issue are we trying to solve?"
+3. "Why is this change necessary?"
+4. "Are there other ways to achieve this goal?"
+
+**Then Collaborative Solution Mode:**
+- Unified team assessment with practical considerations
+- Clear recommendations with reasoning
+- Follow-up questions for clarification
+
+### Primary Voice System
+
+**Unified Response Architecture:**
+- Single voice per response incorporating team expertise
+- Seamless expertise integration without "chiming in" patterns
+- Response tagging shows expertise contributions: `[BD]` `[SS]` `[UX]`
+
+**Voice Management:**
+- Default: Project Coordinator leads unless specific persona addressed
+- Explicit engagement: `@persona_name` assigns primary voice
+- Natural handoffs: Primary voice shifts with topic transitions
+
+### Context-Aware Discovery
+
+**Automatic Suggestions:**
+- Domain keyword analysis triggers relevant persona suggestions
+- Question complexity assessment suggests team activation
+- Historical patterns inform recommendation quality
+
+**Suggestion Presentation:**
+```
+💡 Based on your authentication question, consider activating @security_specialist
+   Add with: "add security specialist" or "activate security team"
+   
+Current team: @project_coordinator
+Available: @security_specialist, @backend_developer, @ui_designer
+```
+
+## Performance Management
+
+### Metrics Dashboard
+
+**Current Session View**
+```
+"show performance metrics"
+
+📊 Session Performance
+Active Team: React Development Team (6 personas)
+Questions: 12 (10 with personas, 2 without)
+Response Length: +110% vs base LLM
+Estimated Overhead: ~25-30% context usage
+```
+
+**Impact Assessment**
+```
+"persona impact summary"
+
+⚡ Performance Impact
+Team Size: 6 personas - consider smaller teams for routine questions
+Response Quality: Enhanced collaboration (high user engagement)
+Optimization: Current size effective for complex projects
+```
+
+**Historical Analysis**
+```
+"metrics summary"
+
+📈 Usage Summary (Last 30 Days)
+Most Used: @project_coordinator (89%), @security_specialist (67%)
+Least Used: @database_expert (12%)
+Recommendations: Consider removing unused personas
+```
+
+### Performance Controls
+
+**Impact Management:**
+- `"show performance metrics"` → Current session impact
+- `"minimal mode"` → Reduce overhead for simple questions
+- `"personas off"` → Complete system shutdown
+- `"monitoring mode"` → Detailed tracking enabled
+
+**Optimization Features:**
+- Automatic roster size recommendations
+- Usage pattern analysis
+- Performance trend identification
+- Resource impact transparency
+
+## Best Practices
+
+### Team Composition
+
+**Effective Team Sizes:**
+- **Small teams (2-3 personas)**: Routine questions, focused expertise
+- **Medium teams (4-5 personas)**: Complex projects, multiple domains
+- **Large teams (6+ personas)**: Comprehensive analysis, major decisions
+
+**Complementary Expertise:**
+- Always include project coordinator for unified voice
+- Balance technical and design expertise
+- Include security specialist for user-facing applications
+- Add domain specialists based on project needs
+
+### Framework Usage Patterns
+
+**Session Management:**
+- Start with minimal team, add expertise as needed
+- Use performance metrics to optimize team size
+- Deactivate unused personas to reduce overhead
+- Leverage team templates for recurring workflows
+
+**Collaboration Optimization:**
+- Let framework suggest personas rather than pre-loading large teams
+- Use direct addressing (`@persona_name`) for expertise handoffs
+- Monitor performance impact and adjust team size accordingly
+- Save successful team compositions as templates
+
+### Cross-Platform Consistency
+
+**Schema Management:**
+- Maintain persona schemas in centralized repository (GitHub)
+- Use version control for schema updates
+- Document team definitions and collaboration patterns
+- Regular sync between platforms and central repository
+
+**Command Standardization:**
+- Use consistent natural language commands across platforms
+- Leverage framework's adaptive command recognition
+- Document platform-specific capabilities and limitations
+- Maintain fallback strategies for reduced functionality
+
+### Quality Assurance
+
+**Framework Effectiveness:**
+- Monitor response quality vs team size trade-offs
+- Track user satisfaction with collaborative responses
+- Identify most valuable persona combinations
+- Optimize based on actual usage patterns rather than assumptions
+
+**Collaboration Quality:**
+- Ensure unified voice maintained across team responses
+- Verify expertise attribution accuracy
+- Monitor for persona consistency within collaborative responses
+- Balance collaboration complexity with response clarity
 
 ---
 
-By following this implementation guide, you can leverage the Persona Framework across multiple AI platforms, providing a consistent collaborative AI assistance experience tailored to your software development needs.
+## Quick Start Commands
+
+**Essential Commands for New Users:**
+```
+"personas on"                    # Activate framework
+"show my teams"                  # See available teams
+"activate [team name]"           # Start with pre-configured team
+"add @persona_name"              # Add individual expertise
+"show performance metrics"       # Monitor impact
+"personas off"                   # Return to base LLM
+```
+
+**Advanced Usage:**
+```
+"suggest personas for this question"    # Get contextual recommendations
+"create team [name] with @persona1 @persona2"  # Build custom team
+"save current team as [template_name]"  # Save successful combinations
+"minimal persona mode"                   # Reduce overhead
+```
+
+The Persona Framework v2.0 transforms AI assistance from individual expert consultation into true collaborative team intelligence, with sophisticated state management and performance optimization built in.
