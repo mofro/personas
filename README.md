@@ -9,7 +9,7 @@ This tool allows you to use multiple AI personas in your development workflow, p
    - `persona-framework/config/*` - The persona framework configuration files
    - `/persona-framework/personas/*` - The persona catalog
 
-2. Initialize the framework within AI Workbench (if required by your setup) - See the `Persona_Framework_Implementation_Guide.md` for detailed instructions.
+2. Initialize the framework within a context store (if required by your setup) - See the `Persona_Framework_Implementation_Guide.md` for detailed instructions.
 
 ## Usage
 
