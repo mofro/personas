@@ -12,12 +12,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # - name: Set up Node.js (if applicable)
-      #   uses: actions/setup-node@v2
+      #   uses: actions/setup-node@v4
       #   with:
-      #     node-version: '14'  # Specify your Node.js version if applicable
+      #     node-version: '20'  # Specify your Node.js version if applicable
 
       # - name: Install dependencies (if applicable)
       #   run: |
@@ -39,7 +39,7 @@ jobs:
           zip -r ../deployable.zip .  # Create a zip file of the deployable directory
 
       - name: Upload deployable artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: deployable-artifact
           path: deployable.zip
