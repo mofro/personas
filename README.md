@@ -1,4 +1,4 @@
-# Persona Framework v2.0
+# Team Intelligence Framework v2.1
 
 A collaborative AI team management system that enables multiple specialized personas to work together seamlessly, providing expert guidance across different domains through unified team intelligence.
 
