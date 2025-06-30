@@ -31,6 +31,13 @@
   "knowledge_base": [
     {
       "type": "documentation",
+      "url": "https://context7.com/",
+      "description": "Updated language MCP catalog. Contains information about the latest language features and best practices.",
+      "project_relevance": "Useful as a prompt resource for RAG-powered language and framework documentation. Add 'use context7' to your prompts to access this resource.",
+      "category": "language_reference"
+    },
+    {
+      "type": "documentation",
       "url": "https://www.typescriptlang.org/docs/",
       "description": "TypeScript documentation for language features and best practices",
       "project_relevance": "Essential for understanding TypeScript usage in the project",
