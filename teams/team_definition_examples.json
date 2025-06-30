@@ -1,0 +1,50 @@
+# EXAMPLE Team Definition Files
+
+These are example team configurations to demonstrate the team definition schema. 
+Users should create their own team files based on their available personas and work contexts.
+
+## Generation Mechanism
+Team files can be created by:
+1. **Manual creation**: Copy and modify these examples
+2. **Framework generation**: Use command "create team [name] with personas [list]"
+3. **Discovery suggestion**: Framework suggests teams based on usage patterns
+
+---
+
+## security_review_team.json (EXAMPLE)
+
+{
+  "schema_version": "1.0",
+  "metadata": {
+    "name": "security_review_team",
+    "description": "Team focused on security analysis, code review, and threat assessment",
+    "author": "framework_example",
+    "version": "1.0",
+    "created_date": "2025-01-18",
+    "example": true
+  },
+  "team": {
+    "team_name": "security_review_team",
+    "display_name": "Security Review Team",
+    "description": "Comprehensive security analysis and code review",
+    "members": [
+      "project_coordinator",
+      "security_specialist", 
+      "backend_developer",
+      "infrastructure_engineer"
+    ],
+    "default_primary": "security_specialist"
+  },
+  "activation": {
+    "auto_suggest_contexts": [
+      "security", "authentication", "authorization", 
+      "encryption", "vulnerability", "penetration testing",
+      "compliance", "audit", "threat modeling"
+    ],
+    "auto_suggest_keywords": [
+      "secure", "auth", "login", "password", "token",
+      "ssl", "tls", "certificate", "firewall", "access control"
+    ],
+    "discovery_priority": "high"
+  }
+}

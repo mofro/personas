@@ -1,0 +1,115 @@
+# Additional EXAMPLE Team Definitions
+
+These examples demonstrate different team compositions and discovery contexts.
+Create your own teams based on your actual personas and project needs.
+
+---
+
+## frontend_development_team.json (EXAMPLE)
+{
+  "schema_version": "1.0",
+  "metadata": {
+    "name": "frontend_development_team",
+    "description": "UI/UX focused development team",
+    "version": "1.0",
+    "example": true
+  },
+  "team": {
+    "team_name": "frontend_development_team",
+    "display_name": "Frontend Development Team", 
+    "members": [
+      "project_coordinator",
+      "ui_designer",
+      "frontend_developer",
+      "ux_specialist",
+      "accessibility_expert"
+    ],
+    "default_primary": "frontend_developer"
+  },
+  "activation": {
+    "auto_suggest_contexts": [
+      "ui", "ux", "design", "frontend", "react", "vue", "angular",
+      "css", "html", "javascript", "responsive", "mobile", "accessibility"
+    ],
+    "discovery_priority": "medium"
+  }
+}
+
+## architecture_planning_team.json (EXAMPLE)
+{
+  "schema_version": "1.0",
+  "metadata": {
+    "name": "architecture_planning_team",
+    "description": "High-level system architecture and planning",
+    "version": "1.0",
+    "example": true
+  },
+  "team": {
+    "team_name": "architecture_planning_team",
+    "display_name": "Architecture Planning Team",
+    "members": [
+      "project_coordinator", 
+      "senior_architect",
+      "database_specialist",
+      "infrastructure_engineer", 
+      "performance_engineer",
+      "integration_specialist"
+    ],
+    "default_primary": "senior_architect"
+  },
+  "activation": {
+    "auto_suggest_contexts": [
+      "architecture", "design patterns", "scalability", "performance",
+      "database design", "system integration", "microservices", "api design"
+    ],
+    "discovery_priority": "high"
+  }
+}
+
+## content_strategy_team.json (EXAMPLE)
+{
+  "schema_version": "1.0", 
+  "metadata": {
+    "name": "content_strategy_team",
+    "description": "Content creation, documentation, and communication strategy",
+    "version": "1.0",
+    "example": true
+  },
+  "team": {
+    "team_name": "content_strategy_team",
+    "display_name": "Content Strategy Team",
+    "members": [
+      "project_coordinator",
+      "technical_writer", 
+      "content_strategist",
+      "documentation_specialist",
+      "communication_expert"
+    ],
+    "default_primary": "content_strategist"
+  },
+  "activation": {
+    "auto_suggest_contexts": [
+      "documentation", "writing", "content", "communication",
+      "user guides", "api docs", "tutorials", "messaging", "copywriting"
+    ],
+    "discovery_priority": "low"
+  }
+}
+
+---
+
+## Team Generation Commands (Future Implementation)
+
+```
+# Create new team interactively
+"create team security_audit with @security_specialist @compliance_expert @project_coordinator"
+
+# Generate team from current active roster  
+"save current team as mobile_development_team"
+
+# Suggest teams based on available personas
+"suggest teams for personas in /security directory"
+
+# Copy and modify existing team
+"copy frontend_team as mobile_team, add @mobile_specialist, remove @accessibility_expert"
+```

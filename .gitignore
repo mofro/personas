@@ -1,0 +1,19 @@
+# Development environment
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*.zip
+.devnotes/
+
+# Logs and databases
+*.log
+logs/
+temp/
+
+# Temporary files
+tmp/
+temp_*
+*.tmp
+*.temp
